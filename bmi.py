@@ -19,7 +19,11 @@ heightEntry = tkinter.Entry(top).grid(row = 1, column=1)
 #Entry box for age
 ageEntry = tkinter.Entry(top).grid(row = 2, column=1)
 
-#weightEntry.grid(row = 0, column=1)
+#Quit Button
+tkinter.Button(top,text="Quit",command=top.quit).grid(row=3,column=0)
+
+#Calculation button.
+tkinter.Button(top,text="Calculate Fitness Info",command=top.quit).grid(row=3,column=1)
 
 top.mainloop()
 
