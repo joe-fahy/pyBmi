@@ -1,6 +1,10 @@
 import tkinter
+#import tkMessageBox
+
+#Declare main window
 top = tkinter.Tk()
 top.title("Fitness Program")
+
 #Label for weight.
 tkinter.Label(top,text="Weight in kgs: ").grid(row=0)
 
@@ -11,19 +15,45 @@ tkinter.Label(top,text="Height in metres: ").grid(row=1)
 tkinter.Label(top,text="Age in years: ").grid(row=2)
 
 #Entry box for weight
-weightEntry = tkinter.Entry(top).grid(row = 0, column=1)
+weightEntry = tkinter.Entry(top)
+weightEntry.grid(row = 0, column=1)
 
 #Entry box for height
-heightEntry = tkinter.Entry(top).grid(row = 1, column=1)
+heightEntry = tkinter.Entry(top)
+heightEntry.grid(row = 1, column=1)
 
 #Entry box for age
-ageEntry = tkinter.Entry(top).grid(row = 2, column=1)
+ageEntry = tkinter.Entry(top)
+ageEntry.grid(row = 2, column=1)
+
+#Quit method for button.
+def quit():
+	global top
+	top.destroy()
+
+#Method to get entry field data, and make a calculation.
+def calculationMethod():
+			
+	
+
+	we = weightEntry.get()
+	he = heightEntry.get()
+	age = ageEntry.get()
+	
+	myLabel = tkinter.Label(top,text="Weight= {}".format(weightEntry.get()))
+	myLabel.grid(row = 4, column =1)
+
+	print("+++++++++++++++++")
+	print("Age = {} , Weight = {} , Height = {}".format(ageEntry.get(),we,heightEntry.get()))
+	print("+++++++++++++++++")
 
 #Quit Button
-tkinter.Button(top,text="Quit",command=top.quit).grid(row=3,column=0)
+tkinter.Button(top,text="Quit",command=quit).grid(row=3,column=0)
 
 #Calculation button.
-tkinter.Button(top,text="Calculate Fitness Info",command=top.quit).grid(row=3,column=1)
+#tkinter.Button(top,text="Calculate Fitness Info",command=calculationMethod(weightEntry,heightEntry,ageEntry)).grid(row=3,column=1)
+tkinter.Button(top,text="Calculate Fitness Info",command=calculationMethod()).grid(row=3,column=1)
+
 
 top.mainloop()
 
