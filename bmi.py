@@ -9,6 +9,38 @@ def bmiCalc(w,h):
 	bmi = w/hSquared
 	return bmi
 
+#Method to calc bmr
+def bmrCalc(w,h,a):
+	wn = w*9.6
+	ho = (h*100)*1.8
+	af = a*4.7
+	subtotal = (wn + ho) - af
+	finalTotal = subtotal + 655
+	return finalTotal
+
+#Method to calc tDee
+def tDeeCalc(bmr):
+	print("0 - Sedentary - Little to no excercise, desk job.\n")
+	print("1 - Lightly Active - Light Excercise 1-3 days per week.\n")
+	print("2 - Moderately Active - Moderate Excercise 3-5 days per week.\n")
+	print("3 - Very Active - Heavy Excercise 6-7 days per week.\n")
+	print("4 - Extremely Active - Extremely Heavy Excercise, twice per day.\n")
+	print("5 - FBG workouts\n")
+	activityFactorSelection = int(input("Please enter the number which corresponds to your activity level:"))
+	
+	activityFactorList = [1.2,1.375,1.55,1.725,1.9,1.63]
+
+	activityFactor = activityFactorList[activityFactorSelection]
+	print("Your activity factor is {}".format(activityFactor))
+
+	tdee = bmr * activityFactor
+	return tdee
+
+#Method to calc daily cal needs
+def dailyCalNeeds(tDee):
+	dailyCalNeed = tDee - 500
+	return dailyCalNeed
+
 
 #Declare main window for GUI
 top = tkinter.Tk()
@@ -53,13 +85,28 @@ def calculationMethod():
 	we = float(we)
 	he = float(he)
 	age = float(age)
+
+	bmi = bmiCalc(we,he)
+	
 	
 	#Display the users stats on the GUI
-	userTitleLabel = tkinter.Label(top,text="Your info: ")
+	userTitleLabel = tkinter.Label(top,text="Your info: ",font='Helvetica 18 bold')
 	userTitleLabel.grid(row = 5, column =0)	
 	
-	weLabel = tkinter.Label(top,text="Weight= {}".format(weightEntry.get()))
+	weLabel = tkinter.Label(top,text="Weight= {}".format(we))
 	weLabel.grid(row = 7, column =0)
+
+	heLabel = tkinter.Label(top,text="Height= {}".format(he))
+	heLabel.grid(row = 8, column =0)
+
+	ageLabel = tkinter.Label(top,text="Age= {}".format(age))
+	ageLabel.grid(row = 9, column =0)
+
+	bmiLabel = tkinter.Label(top,text="BMI= {}".format(bmi))
+	bmiLabel.grid(row = 10, column =0)
+
+	#weLabel = tkinter.Label(top,text="Weight= {}".format(bmi))
+	#weLabel.grid(row = 11, column =0)
 	
 	#Print info for debug.
 	print("+++++++++++++++++")
@@ -89,34 +136,6 @@ age = float(input("Please input your age in years:"))
 
 
 
-def bmrCalc(w,h,a):
-	wn = w*9.6
-	ho = (h*100)*1.8
-	af = a*4.7
-	subtotal = (wn + ho) - af
-	finalTotal = subtotal + 655
-	return finalTotal
-
-def tDeeCalc(bmr):
-	print("0 - Sedentary - Little to no excercise, desk job.\n")
-	print("1 - Lightly Active - Light Excercise 1-3 days per week.\n")
-	print("2 - Moderately Active - Moderate Excercise 3-5 days per week.\n")
-	print("3 - Very Active - Heavy Excercise 6-7 days per week.\n")
-	print("4 - Extremely Active - Extremely Heavy Excercise, twice per day.\n")
-	print("5 - FBG workouts\n")
-	activityFactorSelection = int(input("Please enter the number which corresponds to your activity level:"))
-	
-	activityFactorList = [1.2,1.375,1.55,1.725,1.9,1.63]
-
-	activityFactor = activityFactorList[activityFactorSelection]
-	print("Your activity factor is {}".format(activityFactor))
-
-	tdee = bmr * activityFactor
-	return tdee
-
-def dailyCalNeeds(tDee):
-	dailyCalNeed = tDee - 500
-	return dailyCalNeed
 
 myBmr = bmrCalc(weight,height,age)
 	
