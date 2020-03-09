@@ -1,7 +1,16 @@
 import tkinter
 #import tkMessageBox
 
-#Declare main window
+#Define method to calculate BMI
+def bmiCalc(w,h):
+	
+	hSquared = h*h
+	#print(hSquared)
+	bmi = w/hSquared
+	return bmi
+
+
+#Declare main window for GUI
 top = tkinter.Tk()
 top.title("Fitness Program")
 
@@ -35,16 +44,27 @@ def quit():
 def calculationMethod():
 			
 	
-
+	#Get the users stats into vars from entry boxes.
 	we = weightEntry.get()
 	he = heightEntry.get()
 	age = ageEntry.get()
-	
-	myLabel = tkinter.Label(top,text="Weight= {}".format(weightEntry.get()))
-	myLabel.grid(row = 4, column =1)
 
+	#Convert to appropriate types
+	we = float(we)
+	he = float(he)
+	age = float(age)
+	
+	#Display the users stats on the GUI
+	userTitleLabel = tkinter.Label(top,text="Your info: ")
+	userTitleLabel.grid(row = 5, column =0)	
+	
+	weLabel = tkinter.Label(top,text="Weight= {}".format(weightEntry.get()))
+	weLabel.grid(row = 7, column =0)
+	
+	#Print info for debug.
 	print("+++++++++++++++++")
 	print("Age = {} , Weight = {} , Height = {}".format(ageEntry.get(),we,heightEntry.get()))
+	print("Your bmi is: {}".format(bmiCalc(we,he)))
 	print("+++++++++++++++++")
 
 #Quit Button
@@ -52,7 +72,7 @@ tkinter.Button(top,text="Quit",command=quit).grid(row=3,column=0)
 
 #Calculation button.
 #tkinter.Button(top,text="Calculate Fitness Info",command=calculationMethod(weightEntry,heightEntry,ageEntry)).grid(row=3,column=1)
-tkinter.Button(top,text="Calculate Fitness Info",command=calculationMethod()).grid(row=3,column=1)
+tkinter.Button(top,text="Calculate Fitness Info",command=calculationMethod).grid(row=3,column=1)
 
 
 top.mainloop()
@@ -65,12 +85,7 @@ age = float(input("Please input your age in years:"))
 
 #print(weight,height)
 
-def bmiCalc(w,h):
-	
-	hSquared = h*h
-	#print(hSquared)
-	bmi = w/hSquared
-	return bmi
+
 
 
 
