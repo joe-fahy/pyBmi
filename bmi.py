@@ -46,6 +46,9 @@ def dailyCalNeeds(tDee):
 top = tkinter.Tk()
 top.title("Fitness Program")
 
+#Add an icon to window.
+top.iconphoto(False,tkinter.PhotoImage(file=r'/home/joe/programming/pythonFiles/pyBmi/fitnessIcon.png'))
+
 #Label for weight.
 tkinter.Label(top,text="Weight in kgs: ").grid(row=0)
 
@@ -66,6 +69,27 @@ heightEntry.grid(row = 1, column=1)
 #Entry box for age
 ageEntry = tkinter.Entry(top)
 ageEntry.grid(row = 2, column=1)
+
+#Radio Buttons for activity level.
+activityFactor = tkinter.IntVar(top).get()
+
+levelZero = tkinter.Radiobutton(top, text="Zero",variable=activityFactor, value = 0)
+levelZero.grid(row = 0, column = 2)
+
+levelOne = tkinter.Radiobutton(top, text="One",variable=activityFactor, value = 1)
+levelOne.grid(row = 1, column = 2)
+
+levelTwo = tkinter.Radiobutton(top, text="Two",variable=activityFactor, value = 2)
+levelTwo.grid(row = 2, column = 2)
+
+levelThree = tkinter.Radiobutton(top, text="Three",variable=activityFactor, value = 3)
+levelThree.grid(row = 3, column = 2)
+
+levelFour = tkinter.Radiobutton(top, text="Four",variable=activityFactor, value = 4)
+levelFour.grid(row = 4, column = 2)
+
+levelFive = tkinter.Radiobutton(top, text="Five",variable=activityFactor, value = 5)
+levelFive.grid(row = 5, column = 2)
 
 #Quit method for button.
 def quit():
@@ -112,6 +136,7 @@ def calculationMethod():
 	print("+++++++++++++++++")
 	print("Age = {} , Weight = {} , Height = {}".format(ageEntry.get(),we,heightEntry.get()))
 	print("Your bmi is: {}".format(bmiCalc(we,he)))
+	print("Activity Factor Selection is : {}".format(activityFactor))
 	print("+++++++++++++++++")
 
 #Quit Button
