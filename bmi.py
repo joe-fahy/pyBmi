@@ -42,6 +42,38 @@ def dailyCalNeeds(tDee):
 	return dailyCalNeed
 
 
+#Method to calculate body fat percentage.
+def bodyFatPercentage(myHeight,myWeight,myWaistline,myHipline,myNeckline,myWristline,myForearm,myGender):
+	
+	
+	#Convert all measurements to lbs and inches for formula.	
+	myHeight = myHeight*39.37
+	myWaistline=myWaistline*39.37
+	myHipline=myHipline*39.37	
+	myNeckline=myNeckline*39.37
+	myWristline=myWristline*39.37
+	myForearm=myForearm*39.37
+	myWeight=myWeight*2.205
+
+	if myGender == 0:
+		#For men	
+		leanBodyMass = ((myWeight*1.082)+94.42)-(myWaistline*4.15)
+		bodyFatWeight = myWeight - leanBodyMass
+		bodyFatPercent = (bodyFatWeight*100)/myWeight
+	
+	if myGender == 1:
+		#For women
+		factor1 = (myWeight*0.732)+8.987
+		factor2 = myWristline/3.140
+		factor3 = myWaistline*0.157
+		factor4 = myHipline*0.249
+		factor5 = myForearm*0.434
+		leanBodyMass = factor1 + factor2-factor3-factor4+factor5
+		bodyFatWeight = myWeight-leanBodyMass
+		bodyFatPercent = (bodyFatWeight*100)/myWeight
+
+	return bodyFatPercent
+
 #Declare main window for GUI
 top = tkinter.Tk()
 top.title("Fitness Program")
@@ -154,10 +186,19 @@ print("This is a program to calculate your bmi...")
 weight = float(input("Please input your weight in kgs:"))
 height = float(input("Please input your height in metres:"))
 age = float(input("Please input your age in years:"))
+waistLine = float(input("Please input your waistline in metres:"))
+hipLine = float(input("Please input your hipline in metres:"))
+neckLine = float(input("Please input your neckline in metres:"))
+wristLine = float(input("Please input your wristline in metres:"))
+forearm = float(input("Please input your forearm in metres:"))
+gender = float(input("Please input 0 for man, and 1 for woman:"))
 
 #print(weight,height)
 
 
+
+#myHeight,myWeight,myWaistline,myHipline,myNeckline,myWristline,myForearm
+myBodyFatPercentage = bodyFatPercentage(height,weight,waistLine,hipLine,neckLine,wristLine,forearm,gender)
 
 
 
@@ -171,5 +212,5 @@ print("Your bmi is {}.".format(myBmi))
 print("Your bmr is {} calories per day.".format(myBmr))
 print("Your tDee is {}".format(myTDee))
 print("Your daily calory need is {}".format(dailyCalNeeds(myTDee)))
-
+print("YOur body fat percentage is: {}".format(myBodyFatPercentage))
 
